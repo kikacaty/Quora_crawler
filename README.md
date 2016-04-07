@@ -15,13 +15,16 @@ brew install phantomjs
 ```
 
 #Usage
-To use the script, just run the python script
+
+**Currently crash over time on PhantomJS, will update once get patched by PhantomJS.**
+
+~~To use the script, just run the python script~~
 
 ```
 python quora_crawler.py
 ```
 
-It will generate a csv file named `quora_qa.csv` with data of `Question, Answer` pairs. By default it grabs data from https://www.quora.com/topic/Ann-Arbor-MI, you can change it with any valid url:
+~~It will generate a csv file named `quora_qa.csv` with data of `Question, Answer` pairs. By default it grabs data from https://www.quora.com/topic/Ann-Arbor-MI, you can change it with any valid url: ~~
 
 ```
 url = YOUR_URL
