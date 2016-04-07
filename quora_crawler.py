@@ -52,6 +52,8 @@ def save_answers(browser,link):
     
     print "Starting crawling answers on url:", link
     
+    browser.get(link)
+
     if browser.find_elements_by_class_name('answer_count') == []:
         print "No answer for this question."
         return ['NA']
