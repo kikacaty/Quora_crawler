@@ -92,10 +92,14 @@ def save_answers(browser,link):
     answer_list = [ answer.find_elements_by_class_name('rendered_qtext')[-1].text for answer in all_answers]
         
     print "Saving",len(answer_list),"answers of total", answer_num, "answers."
-    print "Finished Crawling answers! Excited"
+
+    sleep(0.5)
+
     return answer_list
 
 url = 'https://www.quora.com/topic/Ann-Arbor-MI'
+
+print "Emulate webdriver with phantomJS..."
 
 # binary = FirefoxBinary('path/to/binary')
 browser = webdriver.PhantomJS()
@@ -108,8 +112,22 @@ question_list,link_list = save_title(browser)
 import csv
 with open('quora_qa.csv', 'wb') as csvfile:
     qawriter = csv.writer(csvfile, delimiter=' ', quoting=csv.QUOTE_MINIMAL)
+
+    count = 0
+
     qawriter.writerow(["Questions","Answers"])
     for i in range(len(link_list)):
+        print "########",count
+        if count == 10:
+            print "restarting browser..."
+            browser.quit()
+            browser = webdriver.PhantomJS()
+            count = 0
+
         ans_list = save_answers(browser,link_list[i])
+        count = count + 1
+        sleep(0.1)
         for ans in ans_list:
-            qawriter.writerow([question_list[i], ans])
+            qawriter.writerow([unicode(question_list[i]).encode("utf-8"), unicode(ans).encode("utf-8")])
+
+browser.quit()
